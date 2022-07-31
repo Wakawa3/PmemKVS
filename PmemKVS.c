@@ -22,7 +22,7 @@
 
 // Root structure
 struct KVstruct {
-	int id;
+	//int id;
     int keylen;
 	char key[MAX_BUF_LEN];
     int value;
@@ -91,8 +91,8 @@ void write_KVS (char *key, int value)
     rootp->value = value;
     pmemobj_persist(pop, &rootp->value, sizeof (rootp->value));
 
-    rootp->id = id;
-    pmemobj_persist(pop, &rootp->id, sizeof (rootp->id));
+    //rootp->id = id;
+    //pmemobj_persist(pop, &rootp->id, sizeof (rootp->id));
 	
 	pmemobj_memcpy_persist(pop, rootp->key, key, rootp->keylen);
 
@@ -144,7 +144,7 @@ void read_KVS(char *key, int read_all)
             //printf("loop: %d\n", i);
             if(strncmp((rootp + i)->key, key, (rootp + i)->keylen) == 0){
                 printf("Read [key: %s, value: %d]\n", (rootp + i)->key, (rootp + i)->value);
-                printf("id: %d\n", (rootp + i)->id);
+                //printf("id: %d\n", (rootp + i)->id);
                 flag = 1;
                 break;
             }
@@ -155,7 +155,7 @@ void read_KVS(char *key, int read_all)
     else{
         for(i = 0; i < number; i++){
             printf("Read [key: %s, value: %d]\n", (rootp + i)->key, (rootp + i)->value);
-            printf("id: %d\n", (rootp + i)->id);
+            //printf("id: %d\n", (rootp + i)->id);
         }
     }
     
@@ -199,18 +199,18 @@ void delete_KVS(char *key){
     for(i = 0; i < number; i++){
         if(strncmp((rootp + i)->key, key, (rootp + i)->keylen) == 0){
             printf("Read [key: %s, value: %d]\n", (rootp + i)->key, (rootp + i)->value);
-            printf("id: %d\n", (rootp + i)->id);
+            //printf("id: %d\n", (rootp + i)->id);
 
             if(i != number - 1){
                 pmemobj_memcpy_persist(pop, rootp + i, rootp + number-1, sizeof(struct KVstruct));
-                (rootp + i)->id = i;
-                pmemobj_persist(pop, &(rootp+i)->id, sizeof(rootp->id));
+                //(rootp + i)->id = i;
+                //pmemobj_persist(pop, &(rootp+i)->id, sizeof(rootp->id));
 
                 printf("overwrite %s\n", key);
             }
             *num_rootp = *num_rootp - 1;
             pmemobj_persist(num_pop, num_rootp, sizeof (int));
-            printf("decrement number: %d\n", *num_rootp);
+            //printf("decrement number: %d\n", *num_rootp);
 
             flag = 1;
             break;
@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
 	} else if (strcmp (argv[1], "-d") == 0 && argc == 3){
         delete_KVS(key);
     } else { 
-		fprintf(stderr, "Usage: %s <-w/-r> <filename>\n", argv[0]);
+		fprintf(stderr, "Usage error\n", argv[0]);
 		exit(1);
 	}
 
