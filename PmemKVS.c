@@ -16,8 +16,8 @@
 #define MAX_BUF_LEN 30
 #define MAX_STORE 100
 
-#define PATH "data"
-#define NUM_PATH "num"
+#define PATH "/mnt/pmem0/data"
+#define NUM_PATH "/mnt/pmem0/num"
 
 
 // Root structure
