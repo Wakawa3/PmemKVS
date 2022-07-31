@@ -10,18 +10,18 @@ struct KVstruct型のデータが配列のように連続して配置されて�
 gcc PmemKVS.c -lpmem -lpmemobj
 でコンパイル
 
-a.out -w <key> <int>
+a.out -w (key) (int)
 で書き込み
 初めて書き込むと/mnt/pmem0ディレクトリにdataとnumというファイルが生成される
 書き込むとnumに記録されている数字がインクリメントされる
 
-a.out -r <key>
+a.out -r (key)
 で読み込み
 
 a.out -ra
 で全要素読み込み
 
-a.out -d <key>
+a.out -d (key)
 で要素削除
 ある要素を削除すると最後尾のデータに置き換えられる
 削除するとnumに記録されている数字がデクリメントされる
